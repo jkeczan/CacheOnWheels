@@ -2,7 +2,8 @@
 	<cffunction name="init" >
 		<cfset this.version = "1.0" />
 		
-		<cfset application.cacheonwheels.storage = "memcached" />
+		<!--- Must use private $wheels directory since the main "wheels" struct isn't initialized yet --->
+		<cfset application.cacheonwheels.storage = application.$wheels.cacheStorage />
 		<cfset application.cacheonwheels.cacheSettings = {} />
 		
 		<cfset $initializeSettings() />
@@ -31,7 +32,7 @@
 		<cfif ARGUMENTS.storage eq "">
 			<cfset ARGUMENTS.storage = "memory" />
 		</cfif>
-		
+
 		<cfset variables.$instance.cache = CreateObject("component", "cache.storage.#ARGUMENTS.storage#").init(argumentCollection=arguments.cacheSettings) />
 		<cfset application.cacheonwheels = variables.$instance />
 	</cffunction>
