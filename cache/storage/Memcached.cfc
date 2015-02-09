@@ -1,11 +1,11 @@
 <cfcomponent extends="BaseStorage" implements="AbstractStorage" output="false">
 	
 	<cffunction name="init" access="public" output="false" returntype="any">
-		<cfargument name="server" required="false" type="string" default="chimera.uubrz4.0001.use1.cache.amazonaws.com:11211">
 		<cfscript>
 			variables.$instance = {};
 			variables.$instance.cache = {};
-			$connect(arguments.server);
+			$connect();
+			
 		</cfscript>
 		<cfreturn this>
 	</cffunction>
@@ -34,7 +34,7 @@
 		
 		<cfset var loc = {} />
 		
-		<cfset loc.retVal = variables.$instance.cache.add(ARGUEMNTS.key) />
+		<cfset loc.retVal = variables.$instance.cache.add(ARGUMENTS.key) />
 		<cfreturn loc.retVal>
 	</cffunction>
 	
@@ -51,11 +51,10 @@
 	</cffunction>
 	
 	<cffunction name="$connect" access="public" returntype="void" >
-		<cfargument name="server" required="true" type="string">
 		<cfset var loc = {} />
 		
 		<cftry>
-			<cfset loc.memFactory = CreateObject("component", "plugins.cacheonwheels.com.flexablecoder.MemcachedFactory").init(ARGUMENTS.server) />
+			<cfset loc.memFactory = CreateObject("component", "plugins.cacheonwheels.com.flexablecoder.MemcachedFactory").init(application.wheels.memcachedServer) />
 			<cfset loc.memcached = loc.memFactory.getMemcached() />
 			
 			<cfset variables.$instance.cache = loc.memcached />
