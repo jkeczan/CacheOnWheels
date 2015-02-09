@@ -1,7 +1,7 @@
 <cfcomponent extends="BaseStorage" implements="AbstractStorage" output="false">
 	
 	<cffunction name="init" access="public" output="false" returntype="any">
-		<cfargument name="server" required="false" type="string" default="chimera.uubrz4.0001.use1.cache.amazonaws.com:11211">
+		<cfargument name="server" required="false" type="string" default="*******">
 		<cfscript>
 			variables.$instance = {};
 			variables.$instance.cache = {};
