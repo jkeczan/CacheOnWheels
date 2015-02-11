@@ -3,6 +3,7 @@
 	<cffunction name="init" access="public" output="false" returntype="any">
 		<cfset super.init() />
 		<cfset variables.$instance.defaultCacheTime = 60 />
+		
 		<cfreturn this>
 	</cffunction>
 	
@@ -16,7 +17,6 @@
 		<cfargument name="time" type="numeric" required="false" default="#variables.$instance.defaultCacheTime#">
 		<cfargument name="category" type="string" required="false" default="#variables.$instance.defaultNameSpace#">
 		<cfargument name="currentTime" type="date" required="false" default="#now()#">
-		
 		<cfscript>
 			var loc = {};
 			if (application.wheels.cacheCullPercentage > 0 && application.wheels.cacheLastCulledAt < DateAdd("n", -application.wheels.cacheCullInterval, Now()) && $cacheCount() >= application.wheels.maximumItemsToCache)

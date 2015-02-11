@@ -1,0 +1,1 @@
+<cfset qry = model("User").findAll(where="firstName = 'amber'") />

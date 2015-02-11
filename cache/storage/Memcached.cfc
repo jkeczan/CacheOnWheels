@@ -33,8 +33,7 @@
 		<cfargument name="currentTime" type="date" required="false" default="#now()#">
 		
 		<cfset var loc = {} />
-		
-		<cfset loc.retVal = variables.$instance.cache.add(ARGUMENTS.key) />
+		<cfset loc.retVal = variables.$instance.cache.get(ARGUMENTS.key) />
 		<cfreturn loc.retVal>
 	</cffunction>
 	
@@ -54,7 +53,7 @@
 		<cfset var loc = {} />
 		
 		<cftry>
-			<cfset loc.memFactory = CreateObject("component", "plugins.cacheonwheels.com.flexablecoder.MemcachedFactory").init(application.wheels.memcachedServer) />
+			<cfset loc.memFactory = CreateObject("component", "plugins.cacheonwheels.com.flexablecoder.MemcachedFactory").init(application.$wheels.memcachedServer) />
 			<cfset loc.memcached = loc.memFactory.getMemcached() />
 			
 			<cfset variables.$instance.cache = loc.memcached />
